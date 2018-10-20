@@ -6,7 +6,7 @@ import ApolloClient from 'apollo-boost';
 import './App.css';
 
 const client = new ApolloClient({
-  uri: 'https://w5xlvm3vzz.lp.gql.zone/graphql',
+  uri: 'https://hasura-hacktoberfest-app.herokuapp.com/v1alpha1/graphql',
 });
 
 class App extends Component {
@@ -19,9 +19,9 @@ class App extends Component {
             <Query
               query={gql`
                 {
-                  rates(currency: "USD") {
-                    currency
-                    rate
+                  items {
+                    id
+                    name
                   }
                 }
               `}
@@ -30,9 +30,9 @@ class App extends Component {
                 if (loading) return <p>Loading...</p>;
                 if (error) return <p>Error :(</p>;
 
-                return data.rates.map(({ currency, rate }) => (
-                  <div key={currency}>
-                    <p>{`${currency}: ${rate}`}</p>
+                return data.items.map(({ id, name }) => (
+                  <div key={id}>
+                    <p>{name}</p>
                   </div>
                 ));
               }}
